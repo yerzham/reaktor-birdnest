@@ -1,0 +1,25 @@
+FROM node:18-alpine
+WORKDIR /app
+RUN apk add --no-cache libc6-compat
+# Uncomment the following line in case you want to disable telemetry during runtime.
+ENV NEXT_TELEMETRY_DISABLED 1
+
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm i; \
+  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+COPY . .
+
+RUN npm run build
+
+ENV NODE_ENV production
+
+ENV PORT $BIRDNEST_UI_PORT
+
+EXPOSE $PORT
+
+CMD ["npm", "run", "start"]

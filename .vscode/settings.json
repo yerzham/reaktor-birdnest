@@ -1,0 +1,8 @@
+{
+  "deno.enablePaths": ["./birdnest-observer", "./birdnest-reporter", "./lib"],
+  "eslint.workingDirectories": [
+    "./birdnest-ui",
+  ],
+  "typescript.tsdk": "./birdnes-ui/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}

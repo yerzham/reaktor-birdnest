@@ -1,0 +1,50 @@
+version: "3"
+services:
+  birdnest-observer:
+    build:
+      context: ./birdnest-observer
+    # volumes:
+    #   - ./birdnest-observer:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+    networks:
+      - birdnest
+  birdnest-reporter:
+    build:
+      context: ./birdnest-reporter
+    # volumes:
+    #   - ./birdnest-reporter:/app
+    ports:
+      - "${BIRDNEST_REPORTER_PORT}:${BIRDNEST_REPORTER_PORT}"
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+    networks:
+      - birdnest
+  birdnest-ui:
+    build:
+      context: ./birdnest-ui
+      dockerfile: ./Dockerfile.prod
+    # volumes:
+    #   - ./birdnest-ui:/app
+    ports:
+      - "${BIRDNEST_UI_PORT}:${BIRDNEST_UI_PORT}"
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+    networks:
+      - birdnest
+  redis:
+    image: redis:7.0.7-alpine3.17
+    command: redis-server --loglevel warning --requirepass ${REDIS_PASSWORD} --appendonly yes --notify-keyspace-events KEx
+    networks:
+      - birdnest
+
+
+networks:
+  birdnest:
+    driver: bridge
