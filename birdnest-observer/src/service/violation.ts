@@ -8,6 +8,8 @@ export const persistViolation = async (serialNumber: string) => {
 };
 
 export const addViolation = async (violation: ViolationDTO) => {
+  console.log(`Adding violation for drone ${violation.serialNumber}. Owner: ${violation.name}. Distance: ${violation.distance}`);
+
   await redis.eval(
     `
     local serialNumber = ARGV[1]
@@ -39,6 +41,8 @@ export const addViolation = async (violation: ViolationDTO) => {
 };
 
 export const updateViolation = async (data: ViolationUpdateDTO) => {
+  console.log(`Updating violation for drone ${data.serialNumber}. Distance: ${data.distance}`);
+  
   await redis.eval(
     `
     local serialNumber = ARGV[1]
