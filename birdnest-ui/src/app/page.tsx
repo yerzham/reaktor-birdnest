@@ -9,7 +9,6 @@ import { ViolationList } from "@/components/violationList";
 import { ViolationDTO } from "@/dto/violation.dto";
 
 const getViolations = async () => {
-  // Record time
   const start = Date.now();
   const response = await fetch(`${process.env.API_SERVER_URL}/violations`, {
     cache: "no-cache"
