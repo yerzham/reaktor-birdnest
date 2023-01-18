@@ -9,5 +9,5 @@ COPY . .
 # Install any necessary dependencies
 RUN deno cache src/deps.ts
 
-# Run the application with --watch option
-CMD ["deno", "run", "--allow-net", "--allow-env", "src/server.ts"]
+# Run the application
+CMD ["run", "--allow-net", "--allow-env", "src/server.ts"]
