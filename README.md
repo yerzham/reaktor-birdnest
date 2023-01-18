@@ -7,7 +7,7 @@
 To deploy locally, you need to have Docker and Docker Compose installed.
 
 1. Clone the repository
-2. Run `docker-compose up` in the root directory
+2. Run `docker compose up --build` in the project root directory
 3. The application is now running at `localhost:5050`
 
 ## Current deployment
@@ -47,12 +47,12 @@ The UI is rendered on the server side using Vercel funcitons. The implementation
 ## Limitations and future improvements
 
 - Sorting is done on the client side. It would be better to do it with database indexing, but there is not much data to sort, so I did not bother with configuring the Redis secondary indexes.
+- Somehow indicate real-time updates on the UI without layout shifts. It jumps around and it is not obvious what data is updated in real-time.
 - If there is more structure and relationships between the data, the system should include a relational database to make it easier to query and process the data.
 - It does not show when the violation was reported. Some strugle with timezones, but it is not too difficult.
 - The are currently no tests. It is not a big issue as it is a simple application, but it would be nice to have some automated tests.
 - Personally, I would separate the backend HTTP endpoints and the websocket connection to different services and develop them independently.
 - Using Redis pub/sub is not optimal to receive real-time data between services. The system as a whole also does not guarantee that the data is correctly synced. There is a tiny time window between first UI render and the websocket connection where data could be altered and the UI would not be updated. This can be mitigated by trying to use RabbitMQ or Kafka and by occasionally polling the backend for the data from the UI to attempt to sync. Please let me know if you have any other ideas on how to improve this.
-- Somehow indicate real-time updates on the UI. It jumps around and it is not obvious what data is updated in real-time.
 
 ## License
 Idk, do whatever you want with this.
