@@ -2,6 +2,8 @@
 
 [Reaktor pre-assignment](https://assignments.reaktor.com/birdnest/) for reporting no-drone zone violations around a birdnest.
 
+Worked on over the weekend and couple work days.
+
 ## Deploy locally
 
 To deploy locally, you need to have Docker and Docker Compose installed.
