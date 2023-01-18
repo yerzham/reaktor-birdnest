@@ -9,8 +9,5 @@ COPY . .
 # Install any necessary dependencies
 RUN deno cache src/deps.ts
 
-# Expose the port that the application will run on
-EXPOSE 3000
-
 # Run the application with --watch option
 CMD ["deno", "run", "--allow-net", "--allow-env", "src/server.ts"]

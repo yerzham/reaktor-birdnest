@@ -1,0 +1,8 @@
+version: "3"
+services:
+  birdnest-observer:
+    build:
+      context: ./birdnest-observer
+    image: birdnest-observer
+    env_file:
+      - ./.env
