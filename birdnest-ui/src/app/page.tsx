@@ -9,11 +9,13 @@ import { ViolationList } from "@/components/violationList";
 import { ViolationDTO } from "@/dto/violation.dto";
 
 const getViolations = async () => {
+  // Record time
+  const start = Date.now();
   const response = await fetch(`${process.env.API_SERVER_URL}/violations`, {
     cache: "no-cache"
   });
   const violations: ViolationDTO[] = await response.json();
-  console.log(violations);
+  console.log(`Took ${Date.now() - start}ms to fetch violations`);
   return violations;
 };
 
